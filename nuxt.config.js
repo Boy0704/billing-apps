@@ -53,6 +53,10 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    ["vue-toastification/nuxt", {
+      timeout: 1000,
+      draggable: false
+    }]
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

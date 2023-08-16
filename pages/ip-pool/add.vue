@@ -72,8 +72,11 @@ export default {
                 //     params: { id: response.data.id },
                 // })
                 console.log(response)
+                this.$toast.info("Sukses simpan data !");
+                this.$router.push('/ip-pool')
             } catch (error) {
                 console.log(error)
+                this.$toast.error("Gagal simpan data !");
             }
         }
     }
