@@ -66,3 +66,12 @@ More information about the usage of this directory in [the documentation](https:
 This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+
+### `DOCKER BUILD X`
+https://dev.to/aws-builders/using-docker-buildx-to-create-cross-platform-docker-images-for-seamless-compatibility-4k8b
+
+docker buildx create --use --name buildx_instance
+
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t boy123/billing-isp-web:0.0.1 .
+
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t boy123/billing-isp-web:0.0.1 --push .

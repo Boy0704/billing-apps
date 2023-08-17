@@ -1,0 +1,8 @@
+version: '3.5'
+
+services:
+  kotlin-restful-api:
+    container_name: billing-isp-web
+    image: billing-isp-web:0.0.1
+    ports:
+      - 3000:3000
