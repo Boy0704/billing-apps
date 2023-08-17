@@ -25,7 +25,7 @@
                                 <h5 class="mb-0 text-primary">Tambah Data Pelanggan</h5>
                             </div>
                             <hr>
-                            <div class="col-md-12">
+                            <div class="col-md-12 mb-3">
                                 <label class="form-label">Nama Depan</label>
                                 <input type="text" class="form-control">
                             </div>
@@ -67,7 +67,7 @@
                                 <h5 class="mb-0 text-primary">Setting Paket</h5>
                             </div>
                             <hr>
-                            <div class="col-md-12">
+                            <div class="col-md-12 mb-3">
                                 <label class="form-label">User PPPoe</label>
                                 <input type="text" class="form-control">
                             </div>
