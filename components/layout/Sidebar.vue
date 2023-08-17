@@ -27,7 +27,7 @@
             </li>
             <li>
                 <Nuxt-link to="/paket-internet">
-                    <div class="parent-icon"><i class='lni lni-dropboxdropbox'></i>
+                    <div class="parent-icon"><i class='lni lni-dropbox'></i>
                     </div>
                     <div class="menu-title">Paket Internet</div>
                 </Nuxt-link>
