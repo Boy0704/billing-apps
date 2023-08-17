@@ -20,14 +20,14 @@
             </li>
             <li>
                 <Nuxt-link to="/pelanggan">
-                    <div class="parent-icon"><i class='bx bx-user-voice'></i>
+                    <div class="parent-icon"><i class='lni lni-users'></i>
                     </div>
                     <div class="menu-title">Data Pelanggan</div>
                 </Nuxt-link>
             </li>
             <li>
                 <Nuxt-link to="/paket-internet">
-                    <div class="parent-icon"><i class='bx bx-slider-alt'></i>
+                    <div class="parent-icon"><i class='lni lni-dropboxdropbox'></i>
                     </div>
                     <div class="menu-title">Paket Internet</div>
                 </Nuxt-link>
@@ -39,7 +39,6 @@
                     <div class="menu-title">IP Pool</div>
                 </Nuxt-link>
             </li>
-
             <li>
                 <Nuxt-link to="/config-olt">
                     <div class="parent-icon"><i class='bx bx-terminal'></i>
