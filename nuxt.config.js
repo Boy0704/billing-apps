@@ -1,4 +1,17 @@
 export default {
+
+  publicRuntimeConfig: {
+    baseURLWA: process.env.WA_API,
+    tokenWA: process.env.TOKEN_WA
+  },
+  // privateRuntimeConfig: {
+  //   tokenWA: process.env.TOKEN_WA
+  // },
+
+  router: {
+    middleware: 'auth', // Terapkan middleware 'auth' pada semua rute
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'billing-apps',
@@ -53,6 +66,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
     ["vue-toastification/nuxt", {
       timeout: 1000,
       draggable: false
@@ -62,7 +76,32 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'http://localhost:8080',
+    // baseURL: 'https://apidev1.ryzone.id/',
+    baseURL: process.env.API_URL,
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/api/login',
+            method: 'post',
+            propertyName: 'data.token',
+          },
+          logout: false,
+          user: {
+            url: '/api/users',
+            method: 'get',
+            propertyName: 'data',
+          },
+        },
+        // tokenRequired: true,
+        // tokenType: 'bearer',
+        // globalToken: true,
+        // autoFetchUser: true,
+      },
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
