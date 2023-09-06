@@ -9,7 +9,7 @@
                         <li class="breadcrumb-item" aria-current="page">
                             <Nuxt-link to="/paket-internet">Paket Internet</Nuxt-link>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Tambah</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit</li>
                     </ol>
                 </nav>
             </div>
@@ -21,7 +21,7 @@
                         <div class="card-title d-flex align-items-center">
                             <div><i class="bx bxs-edit me-1 font-22 text-primary"></i>
                             </div>
-                            <h5 class="mb-0 text-primary">Tambah Paket Internet</h5>
+                            <h5 class="mb-0 text-primary">Edit Paket Internet</h5>
                         </div>
                         <hr>
                         <form class="row g-3">
@@ -42,7 +42,8 @@
                                     <input type="text" class="form-control" v-model="paketbw.up_burst_limit">
                                 </div>
                                 <div class="col-md-12 mb-3">
-                                    <label class="form-label">Burst Treshold Limit (Bit/s) <span class="text-danger">*</span></label>
+                                    <label class="form-label">Burst Treshold Limit (Bit/s) <span
+                                            class="text-danger">*</span></label>
                                     <input type="text" class="form-control" v-model="paketbw.up_burst_threshold">
                                 </div>
                                 <div class="col-md-12 mb-3">
@@ -53,7 +54,7 @@
                                     <label class="form-label">Limit At (Bit/s) <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" v-model="paketbw.up_limitat">
                                 </div>
-                                
+
                             </div>
                             <div class="col-md-6">
                                 <div class="col-md-12 mb-3">
@@ -68,7 +69,8 @@
                                     <input type="text" class="form-control" v-model="paketbw.down_burst_limit">
                                 </div>
                                 <div class="col-md-12 mb-3">
-                                    <label class="form-label">Burst Treshold Limit (Bit/s) <span class="text-danger">*</span></label>
+                                    <label class="form-label">Burst Treshold Limit (Bit/s) <span
+                                            class="text-danger">*</span></label>
                                     <input type="text" class="form-control" v-model="paketbw.down_burst_threshold">
                                 </div>
                                 <div class="col-md-12 mb-3">
@@ -79,7 +81,7 @@
                                     <label class="form-label">Limit At (Bit/s) <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" v-model="paketbw.down_limitat">
                                 </div>
-                                
+
                             </div>
                             <div class="col-md-8">
                                 <label class="form-label">Priority <span class="text-danger">*</span></label>
@@ -116,17 +118,22 @@ export default {
                 priority: '',
                 up_limitat: '',
                 down_limitat: '',
-            },
+            }
         }
+    },
+    
+    async asyncData({ $axios, params }) {
+        const dataget = await $axios.$get('/api/paketbw/' + params.id)
+        return { dataget }
     },
     methods: {
         async save() {
             try {
-                let response = await this.$axios.$post(
-                    '/api/paketbw',
+                let response = await this.$axios.$put(
+                    '/api/paketbw/' + this.$route.params.id,
                     this.paketbw
                 )
-                this.$toast.info("Sukses Tambah Data !")
+                this.$toast.info("Sukses Edit  Data !")
                 this.$router.push({
                     name: 'paket-internet',
                 })
@@ -136,5 +143,26 @@ export default {
             }
         },
     },
+    mounted() {
+        this.paketbw.nama_paket = this.dataget.data.nama_paket
+        this.paketbw.priority = this.dataget.data.priority
+
+        var maxLimit = this.dataget.data.max_limit.split("/")
+        var burst_limit = this.dataget.data.burst_limit.split("/")
+        var burst_threshold = this.dataget.data.burst_threshold.split("/")
+        var burst_time = this.dataget.data.burst_time.split("/")
+        var limit_at = this.dataget.data.limit_at.split("/")
+
+        this.paketbw.up_max_limit = maxLimit[0]
+        this.paketbw.down_max_limit = maxLimit[1]
+        this.paketbw.up_burst_limit = burst_limit[0]
+        this.paketbw.down_burst_limit = burst_limit[1]
+        this.paketbw.up_burst_threshold = burst_threshold[0]
+        this.paketbw.down_burst_threshold = burst_threshold[1]
+        this.paketbw.up_burst_time = burst_time[0]
+        this.paketbw.down_burst_time = burst_limit[1]
+        this.paketbw.up_limitat = limit_at[0]
+        this.paketbw.down_limitat = limit_at[1]
+    }
 }
 </script>

@@ -20,13 +20,40 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Name Pool</th>
-                                <th>IP Range</th>
+                                <th>Nama Paket</th>
+                                <th>Max Limit</th>
+                                <th>Burst Limit</th>
+                                <th>Burst Threshold</th>
+                                <th>Burst Time</th>
+                                <th>Priority</th>
+                                <th>Limit At</th>
                                 <th>Option</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
+                            <tr v-for="(data, index) in paketbw.data" :key="data.id">
+                                <td>{{ index + 1 }}</td>
+                                <td>{{ data.nama_paket }}</td>
+                                <td>{{ data.max_limit }}</td>
+                                <td>{{ data.burst_limit }}</td>
+                                <td>{{ data.burst_threshold }}</td>
+                                <td>{{ data.burst_time }}</td>
+                                <td>{{ data.priority }}</td>
+                                <td>{{ data.limit_at }}</td>
+                                <td>
+                                    <nuxt-link :to="{
+                                                        name: 'paket-internet-id-edit',
+                                                        params: { id: data.id },
+                                                    }" 
+                                                    class="btn btn-xs btn-primary" title="Edit">
+                                        <i class="bx bx-edit me-0"></i>
+                                    </nuxt-link>
+
+                                    <a @click="deleteData(data.id)" class="btn btn-xs btn-danger" title="Hapus">
+                                        <i class="bx bx-trash me-0"></i>
+                                    </a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -36,5 +63,50 @@
 </template>
 
 <script>
-export default {}
+
+import 'jquery/dist/jquery.min.js';
+//Datatable Modules
+import "datatables.net-dt/js/dataTables.dataTables"
+import "datatables.net-dt/css/jquery.dataTables.min.css"
+import $ from 'jquery'; 
+
+export default {
+    data() {
+        return {
+            paketbw: []
+        }
+    },
+    async asyncData({ $axios }) {
+        const paketbw = await $axios.$get(
+            '/api/paketbw'
+        )
+        setTimeout(function () {
+            $('#example').DataTable();
+        }, 1000);
+        return { paketbw }
+    },
+    methods: {
+        async deleteData(id) {
+            try {
+                let response = await this.$axios.$delete(
+                    '/api/paketbw/'+id,
+                    this.param
+                )
+                console.log(response)
+                if (response.code == 200) {
+                    this.$toast.info("Sukses delete data !");
+                    this.refresh()
+                } else {
+                    this.$toast.warning(response.status);
+                }
+            } catch (error) {
+                console.log(error)
+                this.$toast.error("Gagal delete data !");
+            }
+        },
+        refresh() {
+            this.$nuxt.refresh()
+        },
+    }
+}
 </script>
