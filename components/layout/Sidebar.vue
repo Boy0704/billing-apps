@@ -19,6 +19,13 @@
                 </Nuxt-link>
             </li>
             <li>
+                <Nuxt-link to="/nas">
+                    <div class="parent-icon"><i class='bx bx-devices'></i>
+                    </div>
+                    <div class="menu-title">Data Nas</div>
+                </Nuxt-link>
+            </li>
+            <li>
                 <Nuxt-link to="/pelanggan">
                     <div class="parent-icon"><i class='lni lni-users'></i>
                     </div>
