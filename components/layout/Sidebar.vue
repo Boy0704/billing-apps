@@ -1,3 +1,7 @@
+<script setup>
+
+</script>
+
 <template>
     <!-- <div class="sidebar-wrapper" data-simplebar="true"> -->
     <div class="sidebar-wrapper">
@@ -5,7 +9,7 @@
             <div>
                 <img src="~/assets/logo.png" class="logo-icon" alt="logo icon">
             </div>
-            
+
             <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
             </div>
         </div>
@@ -85,7 +89,7 @@
                     <div class="menu-title">Manajemen Menu</div>
                 </Nuxt-link>
             </li>
-            
+
         </ul>
         <!--end navigation-->
     </div>

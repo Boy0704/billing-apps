@@ -53,7 +53,7 @@
                                     <label class="form-label">Limit At (Bit/s) <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" v-model="paketbw.up_limitat">
                                 </div>
-                                
+
                             </div>
                             <div class="col-md-6">
                                 <div class="col-md-12 mb-3">
@@ -79,11 +79,18 @@
                                     <label class="form-label">Limit At (Bit/s) <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" v-model="paketbw.down_limitat">
                                 </div>
-                                
+
                             </div>
                             <div class="col-md-8">
                                 <label class="form-label">Priority <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" v-model="paketbw.priority">
+                            </div>
+                            <div class="col-md-8">
+                              <label class="form-label">Nas Type <span class="text-danger">*</span></label>
+                              <select class="form-select mb-3" aria-label="Default select example" v-model="paketbw.nas">
+                                <option value="global">Global</option>
+                                <option v-for="(item, index) in nas.data" v-bind:value="item.nasname">{{ item.shortname }}</option>
+                              </select>
                             </div>
                             <div class="col-md-12">
                                 <a @click="save()" class="btn btn-primary px-5 radius-30">
@@ -100,6 +107,8 @@
 </template>
 
 <script>
+import $ from "jquery";
+
 export default {
     data() {
         return {
@@ -114,10 +123,18 @@ export default {
                 up_burst_time: '',
                 down_burst_time: '',
                 priority: '',
+                nas: '',
                 up_limitat: '',
                 down_limitat: '',
             },
         }
+    },
+    async asyncData({ $axios }) {
+      const nas = await $axios.$get(
+        '/api/nas'
+      )
+
+      return { nas }
     },
     methods: {
         async save() {

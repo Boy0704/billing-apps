@@ -1,8 +1,7 @@
 export default {
-
   publicRuntimeConfig: {
     baseURLWA: process.env.WA_API,
-    tokenWA: process.env.TOKEN_WA
+    tokenWA: process.env.TOKEN_WA,
   },
   // privateRuntimeConfig: {
   //   tokenWA: process.env.TOKEN_WA
@@ -26,17 +25,15 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     script: [
-      { src: "/js/pace.min.js" },
-      { src: "/js/bootstrap.bundle.min.js" },
-      { src: "/js/jquery.min.js" },
-      { src: "/plugins/simplebar/js/simplebar.min.js" },
-      { src: "/plugins/metismenu/js/metisMenu.min.js" },
-      { src: "/plugins/perfect-scrollbar/js/perfect-scrollbar.js" },
-      { src: "/js/app.js" },
-    ]
+      { src: '/js/pace.min.js' },
+      { src: '/js/bootstrap.bundle.min.js' },
+      { src: '/js/jquery.min.js' },
+      { src: '/plugins/simplebar/js/simplebar.min.js' },
+      { src: '/plugins/metismenu/js/metisMenu.min.js' },
+      { src: '/plugins/perfect-scrollbar/js/perfect-scrollbar.js' },
+      { src: '/js/app.js' },
+    ],
   },
-
-  
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -67,10 +64,13 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/auth',
-    ["vue-toastification/nuxt", {
-      timeout: 1000,
-      draggable: false
-    }]
+    [
+      'vue-toastification/nuxt',
+      {
+        timeout: 1000,
+        draggable: false,
+      },
+    ],
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
