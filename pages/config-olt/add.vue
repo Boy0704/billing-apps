@@ -77,7 +77,7 @@ export default {
         async save() {
             try {
                 let response = await this.$axios.$post(
-                    '/api/olt',
+                    '/olt',
                     this.olt
                 )
                 this.$toast.info("Sukses Tambah Data !")

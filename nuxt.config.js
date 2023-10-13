@@ -85,13 +85,13 @@ export default {
       local: {
         endpoints: {
           login: {
-            url: '/api/login',
+            url: '/login',
             method: 'post',
             propertyName: 'data.token',
           },
           logout: false,
           user: {
-            url: '/api/users',
+            url: '/users',
             method: 'get',
             propertyName: 'data',
           },

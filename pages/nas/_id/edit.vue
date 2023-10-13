@@ -85,14 +85,14 @@ export default {
     },
     
     async asyncData({ $axios, params }) {
-        const dataget = await $axios.$get('/api/nas/' + params.id)
+        const dataget = await $axios.$get('/nas/' + params.id)
         return { dataget }
     },
     methods: {
         async save() {
             try {
                 let response = await this.$axios.$put(
-                    '/api/nas/' + this.$route.params.id,
+                    '/nas/' + this.$route.params.id,
                     this.nas
                 )
                 this.$toast.info("Sukses Edit  Data !")

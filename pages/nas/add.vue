@@ -87,7 +87,7 @@ export default {
         async save() {
             try {
                 let response = await this.$axios.$post(
-                    '/api/nas',
+                    '/nas',
                     this.nas
                 )
                 this.$toast.info("Sukses Tambah Data !")

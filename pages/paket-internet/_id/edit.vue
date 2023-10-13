@@ -123,14 +123,14 @@ export default {
     },
     
     async asyncData({ $axios, params }) {
-        const dataget = await $axios.$get('/api/paketbw/' + params.id)
+        const dataget = await $axios.$get('/paketbw/' + params.id)
         return { dataget }
     },
     methods: {
         async save() {
             try {
                 let response = await this.$axios.$put(
-                    '/api/paketbw/' + this.$route.params.id,
+                    '/paketbw/' + this.$route.params.id,
                     this.paketbw
                 )
                 this.$toast.info("Sukses Edit  Data !")

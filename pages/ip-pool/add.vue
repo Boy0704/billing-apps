@@ -64,7 +64,7 @@ export default {
         async save() {
             try {
                 let response = await this.$axios.$post(
-                    '/api/ippool',
+                    '/ippool',
                     this.param
                 )
                 // this.$router.push({

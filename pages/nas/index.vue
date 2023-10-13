@@ -69,7 +69,7 @@ export default {
     },
     async asyncData({ $axios }) {
         const nas = await $axios.$get(
-            '/api/nas'
+            '/nas'
         )
         return { nas }
     },
@@ -77,7 +77,7 @@ export default {
         async deleteData(id) {
             try {
                 let response = await this.$axios.$delete(
-                    '/api/nas/' + id,
+                    '/nas/' + id,
                     this.param
                 )
                 console.log(response)

@@ -107,7 +107,6 @@
 </template>
 
 <script>
-import $ from "jquery";
 
 export default {
     data() {
@@ -131,7 +130,7 @@ export default {
     },
     async asyncData({ $axios }) {
       const nas = await $axios.$get(
-        '/api/nas'
+        '/nas'
       )
 
       return { nas }
@@ -140,7 +139,7 @@ export default {
         async save() {
             try {
                 let response = await this.$axios.$post(
-                    '/api/paketbw',
+                    '/paketbw',
                     this.paketbw
                 )
                 this.$toast.info("Sukses Tambah Data !")

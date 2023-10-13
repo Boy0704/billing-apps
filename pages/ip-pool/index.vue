@@ -57,7 +57,7 @@ export default {
     },
     async asyncData({ $axios }) {
         const ippools = await $axios.$get(
-            '/api/ippool'
+            '/ippool'
         )
         return { ippools }
     },
@@ -65,7 +65,7 @@ export default {
         async deleteData(id) {
             try {
                 let response = await this.$axios.$delete(
-                    '/api/ippool/'+id,
+                    '/ippool/'+id,
                     this.param
                 )
                 console.log(response)

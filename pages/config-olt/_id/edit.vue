@@ -75,14 +75,14 @@ export default {
     },
     
     async asyncData({ $axios, params }) {
-        const dataget = await $axios.$get('/api/olt/' + params.id)
+        const dataget = await $axios.$get('/olt/' + params.id)
         return { dataget }
     },
     methods: {
         async save() {
             try {
                 let response = await this.$axios.$put(
-                    '/api/olt/' + this.$route.params.id,
+                    '/olt/' + this.$route.params.id,
                     this.olt
                 )
                 this.$toast.info("Sukses Edit  Data !")

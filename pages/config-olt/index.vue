@@ -67,7 +67,7 @@ export default {
     },
     async asyncData({ $axios }) {
         const olt = await $axios.$get(
-            '/api/olt'
+            '/olt'
         )
         return { olt }
     },
@@ -75,7 +75,7 @@ export default {
         async deleteData(id) {
             try {
                 let response = await this.$axios.$delete(
-                    '/api/olt/' + id,
+                    '/olt/' + id,
                     this.param
                 )
                 console.log(response)
