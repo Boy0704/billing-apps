@@ -65,14 +65,7 @@
                                         v-model="pelanggan.alamat"
                                     ></textarea>
                                 </div>
-                                <div class="col-md-12 mb-3">
-                                    <label class="form-label">Area</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        v-model="pelanggan.alamat"
-                                    />
-                                </div>
+                                
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label">Email</label>
                                     <input
@@ -90,10 +83,6 @@
                                         class="form-control"
                                         v-model="pelanggan.no_telp"
                                     />
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label class="form-label">No KTP</label>
-                                    <input type="text" class="form-control" />
                                 </div>
                             </div>
                         </div>
@@ -113,25 +102,7 @@
                                 <h5 class="mb-0 text-primary">Setting Paket</h5>
                             </div>
                             <hr />
-                            <div class="col-md-12 mb-3">
-                                <label class="form-label">User PPPoe</label>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    v-model="pelanggan.kode_pelanggan"
-                                />
-                            </div>
                             <div class="col-md-12">
-                                <div class="col-md-12 mb-3">
-                                    <label class="form-label"
-                                        >Password PPPoe</label
-                                    >
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        v-model="pelanggan.password"
-                                    />
-                                </div>
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label">IP Pool</label>
                                     <div class="input-group">
@@ -145,12 +116,17 @@
                                             class="form-select single-select"
                                             id="inputGroupSelect03"
                                             aria-label="Example select with button addon"
-                                            v-model="selectData"
+                                            v-model="pelanggan.id_ippool"
                                         >
                                             <option selected>Pilih</option>
-                                            <option value="1">Dashboard</option>
-                                            <option value="2">Control</option>
-                                            <option value="3">KPI</option>
+                                            <option
+                                                v-for="(
+                                                    item, index
+                                                ) in ippool.data"
+                                                v-bind:value="item.id"
+                                            >
+                                                {{ item.pool_name }}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -169,20 +145,21 @@
                                             class="form-select single-select"
                                             id="inputGroupSelect03"
                                             aria-label="Example select with button addon"
+                                            v-model="pelanggan.id_paketbw"
                                         >
                                             <option selected>Pilih</option>
                                             <option
                                                 v-for="(
                                                     item, index
                                                 ) in paketbw.data"
-                                                v-bind:value="item.value_paket"
+                                                v-bind:value="item.id"
                                             >
                                                 {{ item.nama_paket }}
                                             </option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-12 mb-3">
+                                <!-- <div class="col-md-12 mb-3">
                                     <label class="form-label"
                                         >Tanggal Register</label
                                     >
@@ -193,7 +170,7 @@
                                         >Masa Aktif (Hari)</label
                                     >
                                     <input type="text" class="form-control" />
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -214,18 +191,13 @@ export default {
     data() {
         return {
             pelanggan: {
-                kode_pelanggan: '',
-                password: '',
                 nama_depan: '',
                 nama_belakang: '',
                 alamat: '',
-                area: '',
                 email: '',
                 no_telp: '',
-                tgl_daftar: '',
-                tgl_expired: '',
-                pool_name: '',
-                rate_limit: '',
+                id_ippool: '',
+                id_paketbw: '',
             },
         }
     },
@@ -236,7 +208,22 @@ export default {
 
         return { ippool, paketbw }
     },
-
-    mounted() {},
+    methods: {
+        async save() {
+            try {
+                let response = await this.$axios.$post(
+                    'pelanggan',
+                    this.pelanggan
+                )
+                this.$toast.info("Sukses Tambah Data !")
+                this.$router.push({
+                    name: 'pelanggan',
+                })
+            } catch (error) {
+                console.log(error)
+                this.$toast.error("Gagal Tambah Data !")
+            }
+        }
+    }
 }
 </script>

@@ -126,6 +126,16 @@ export default {
                 up_limitat: '',
                 down_limitat: '',
             },
+            req : {
+                nama_paket: '',
+                value_paket: '',
+                max_limit: '',
+                burst_limit: '',
+                burst_threshold: '',
+                burst_time: '',
+                priority: '',
+                limit_at: '',
+            }
         }
     },
     async asyncData({ $axios }) {
@@ -138,9 +148,19 @@ export default {
     methods: {
         async save() {
             try {
+
+                this.req.nama_paket = this.paketbw.nama_paket
+                this.req.max_limit = this.paketbw.up_max_limit+"/"+this.paketbw.down_max_limit
+                this.req.burst_limit = this.paketbw.up_burst_limit+"/"+this.paketbw.down_burst_limit
+                this.req.burst_threshold = this.paketbw.up_burst_threshold+"/"+this.paketbw.down_burst_threshold
+                this.req.burst_time = this.paketbw.up_burst_time+"/"+this.paketbw.down_burst_time
+                this.req.priority = this.paketbw.priority
+                this.req.limit_at = this.paketbw.up_limitat+"/"+this.paketbw.down_limitat
+                this.req.value_paket = this.req.max_limit+" "+this.req.burst_limit+" "+this.req.burst_threshold+" "+this.req.burst_time+" "+this.req.priority+" "+this.req.limit_at
+
                 let response = await this.$axios.$post(
                     '/paketbw',
-                    this.paketbw
+                    this.req
                 )
                 this.$toast.info("Sukses Tambah Data !")
                 this.$router.push({
